@@ -2,8 +2,11 @@ import "dotenv/config";
 import express from "express";
 import multer from "multer";
 import path from "path";
+import { createRequire } from "node:module";
 import { fileURLToPath } from "url";
 import { MENU_CATALOG } from "./server/menu-catalog.js";
+
+const require = createRequire(import.meta.url);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT) || 3000;
@@ -11,6 +14,7 @@ const GEMINI_API_KEY = getEnv("GEMINI_API_KEY", "GOOGLE_API_KEY", "GOOGLE_AI_API
 const ELEVENLABS_API_KEY = getEnv("ELEVENLABS_API_KEY", "ELEVEN_API_KEY", "XI_API_KEY");
 const GEMINI_MODEL = getEnv("GEMINI_MODEL") || "gemini-2.5-flash";
 const ELEVENLABS_MODEL_ID = getEnv("ELEVENLABS_MODEL_ID") || "scribe_v2";
+const VULTR_API_KEY = getEnv("VULTR_API_KEY");
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -19,7 +23,6 @@ const upload = multer({
 
 const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 
 function getEnv(...names) {
   for (const name of names) {
@@ -186,8 +189,30 @@ app.get("/api/health", (_req, res) => {
     voiceEnabled: Boolean(ELEVENLABS_API_KEY && GEMINI_API_KEY),
     voiceMode: "elevenlabs-transcription-gemini-cart",
     elevenLabsModel: ELEVENLABS_MODEL_ID,
-    geminiModel: GEMINI_MODEL
+    geminiModel: GEMINI_MODEL,
+    vultrConfigured: Boolean(VULTR_API_KEY)
   });
+});
+
+app.get("/api/vultr-ping", async (_req, res) => {
+  try {
+    const { initialize } = require("@vultr/vultr-node");
+    const vultr = initialize({ apiKey: VULTR_API_KEY });
+    res.json({
+      ok: true,
+      vultr: true,
+      package: "@vultr/vultr-node",
+      purpose: "Loaded and initialized the Vultr Node package for this website.",
+      configured: Boolean(VULTR_API_KEY),
+      availableAccountMethod: typeof vultr.account?.getAccountInfo === "function"
+    });
+  } catch (error) {
+    res.status(502).json({
+      ok: false,
+      vultr: false,
+      error: error instanceof Error ? error.message : "Vultr request failed."
+    });
+  }
 });
 
 app.get("/api/menu", (_req, res) => {
@@ -212,6 +237,8 @@ app.post("/api/voice-order", upload.single("audio"), async (req, res) => {
     });
   }
 });
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(PORT, () => {
   console.log(`New Bean running at http://localhost:${PORT}`);
