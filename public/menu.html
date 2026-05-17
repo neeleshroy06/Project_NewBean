@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu | New Bean</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="page-menu">
+  <header class="site-header">
+    <nav class="nav-bar" aria-label="Main navigation">
+      <a class="brand" href="/" aria-label="New Bean home">
+        <span class="bean-mark" aria-hidden="true"></span>
+        New Bean
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a class="is-active" href="/menu.html" aria-current="page">Menu</a>
+        <button class="nav-cart" type="button" data-open-cart>
+          View Cart
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="menu-page-hero">
+      <p class="eyebrow">Order online</p>
+      <h1>Menu</h1>
+      <p class="menu-page-lead">Tap items to add them, or use the voice button to say your order out loud.</p>
+    </section>
+
+    <section class="menu-section menu-section--page">
+      <div class="section-heading menu-heading">
+        <div class="menu-tools" aria-label="Menu filters">
+          <button class="filter-button active" type="button" data-filter="all">All</button>
+          <button class="filter-button" type="button" data-filter="food">Food</button>
+          <button class="filter-button" type="button" data-filter="drink">Drinks</button>
+          <button class="filter-button" type="button" data-filter="deal">Deals</button>
+        </div>
+      </div>
+      <div class="menu-grid" data-menu-grid></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>New Bean - Voice order: tap the mic and try "Add 2 bagels to my cart"</p>
+  </footer>
+
+  <div class="voice-dock" aria-live="polite">
+    <p class="voice-transcript" data-voice-transcript hidden></p>
+    <p class="voice-hint" data-voice-label>Tap to speak your order</p>
+    <button class="voice-fab" type="button" data-voice-order aria-label="Voice order - tap to start recording">
+      <svg class="voice-fab-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Z" fill="currentColor"/>
+        <path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.92V19H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2v-1.08A7 7 0 0 0 19 11Z" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+
+  <aside class="cart-panel" data-cart-panel aria-label="Shopping cart" aria-hidden="true">
+    <div class="cart-backdrop" data-close-cart></div>
+    <section class="cart-sheet" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-header">
+        <h2 id="cart-title">Cart</h2>
+        <button class="icon-button" type="button" data-close-cart aria-label="Close cart">x</button>
+      </div>
+      <div class="cart-items" data-cart-items></div>
+      <div class="cart-summary">
+        <div><span>Subtotal</span><strong data-subtotal>$0.00</strong></div>
+        <div><span>Tax</span><strong data-tax>$0.00</strong></div>
+        <div class="summary-total"><span>Total Payable</span><strong data-total>$0.00</strong></div>
+      </div>
+      <form class="checkout-form" data-checkout-form>
+        <h3>Checkout</h3>
+        <label>
+          Name
+          <input name="name" type="text" placeholder="Your name" required>
+        </label>
+        <label>
+          Pickup time
+          <select name="pickup" required>
+            <option value="ASAP">ASAP</option>
+            <option value="15 minutes">15 minutes</option>
+            <option value="30 minutes">30 minutes</option>
+          </select>
+        </label>
+        <button class="button primary checkout-button" type="submit">Checkout</button>
+      </form>
+    </section>
+  </aside>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+  <script type="module" src="/js/menu.js"></script>
+</body>
+</html>

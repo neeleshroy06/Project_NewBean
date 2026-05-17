@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Bean | Local. Always Fresh.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-bar" aria-label="Main navigation">
+      <a class="brand" href="/" aria-label="New Bean home">
+        <span class="bean-mark" aria-hidden="true"></span>
+        New Bean
+      </a>
+      <div class="nav-links">
+        <a class="is-active" href="/" aria-current="page">Home</a>
+        <a href="/menu.html">Menu</a>
+        <a href="#why">Why Us?</a>
+        <button class="nav-cart" type="button" data-open-cart>
+          View Cart
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="note note-left">Try fresh<br>daily!</div>
+      <div class="note note-right">Today's special:<br>avo toast</div>
+      <div class="hero-content">
+        <p class="eyebrow">Neighborhood coffee and comfort food</p>
+        <h1>
+          <span class="local-word">L<span class="hero-bean" aria-hidden="true"></span>CAL.</span>
+          <span class="fresh-word">always fresh</span>
+        </h1>
+        <p class="hero-copy">Warm drinks, simple food, and extra-good deals on items that should be enjoyed today.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="/menu.html">Order Now</a>
+          <button class="button ghost" type="button" data-open-special>See Today's Deal</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="why-section">
+      <div class="section-heading">
+        <p class="eyebrow">Why New Bean?</p>
+        <h2>Built around good food, less waste, and friendly service.</h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>Fresh</h3>
+          <p>Every food item is made daily in small batches, so nothing sits around.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Local</h3>
+          <p>From neighborhood favorites to seasonal snacks, the menu feels close to home.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Made for you</h3>
+          <p>Customize quantities, review your order, and checkout when you are ready.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Voice ordering</h3>
+          <p>On the menu page, tap the mic and say "Add 2 bagels to my cart" - we handle the rest.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>New Bean - Open daily 7am-4pm - <a href="/menu.html">Browse the menu</a></p>
+  </footer>
+
+  <aside class="cart-panel" data-cart-panel aria-label="Shopping cart" aria-hidden="true">
+    <div class="cart-backdrop" data-close-cart></div>
+    <section class="cart-sheet" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-header">
+        <h2 id="cart-title">Cart</h2>
+        <button class="icon-button" type="button" data-close-cart aria-label="Close cart">x</button>
+      </div>
+      <div class="cart-items" data-cart-items></div>
+      <div class="cart-summary">
+        <div><span>Subtotal</span><strong data-subtotal>$0.00</strong></div>
+        <div><span>Tax</span><strong data-tax>$0.00</strong></div>
+        <div class="summary-total"><span>Total Payable</span><strong data-total>$0.00</strong></div>
+      </div>
+      <form class="checkout-form" data-checkout-form>
+        <h3>Checkout</h3>
+        <label>
+          Name
+          <input name="name" type="text" placeholder="Your name" required>
+        </label>
+        <label>
+          Pickup time
+          <select name="pickup" required>
+            <option value="ASAP">ASAP</option>
+            <option value="15 minutes">15 minutes</option>
+            <option value="30 minutes">30 minutes</option>
+          </select>
+        </label>
+        <button class="button primary checkout-button" type="submit">Checkout</button>
+      </form>
+    </section>
+  </aside>
+
+  <div class="deal-modal" data-deal-modal aria-hidden="true">
+    <div class="modal-backdrop" data-close-special></div>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="deal-title">
+      <div class="modal-product" data-special-card></div>
+      <div class="modal-copy">
+        <h2 id="deal-title">How does it help?</h2>
+        <ul>
+          <li>Reduces food wastage</li>
+          <li>Helps us prepare tomorrow's food fresh</li>
+        </ul>
+        <p><strong>This is just an incentive.</strong><br>You can skip it with no problem.</p>
+        <button class="button outline" type="button" data-close-special>No, thanks!</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+  <script type="module" src="/js/home.js"></script>
+</body>
+</html>
